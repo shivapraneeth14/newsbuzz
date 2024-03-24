@@ -12,6 +12,7 @@ function App() {
 
   return (
     <>
+    <div>explore the new</div>
     <Header/>
     <Outlet/>
     <Footer/>
