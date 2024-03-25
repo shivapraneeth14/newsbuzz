@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Data from './Data';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import { faComment, faHeart, faShare } from '@fortawesome/free-solid-svg-icons';
 
 function Dashboard() {
   const [articles, setArticles] = useState([]);
@@ -37,61 +39,32 @@ function Dashboard() {
     fetchData(); 
   }, []);
 
-  return ( <div className='flex flex-col  justify-evenly' style={{ maxHeight: 'calc(100vh - 200px)', overflow: 'auto' }}>
-      <div className='w-full h-24 px-4 flex justify-evenly items-center rounded-xl bg-white'>
-        <div className='w-32 h-12 bg-black rounded-xl text-white text-sm font-bold text-wrap'></div>
-        <div className='w-32 h-12 bg-black rounded-xl text-white'>Status:
-          <h5 className={status === 'ok' ? 'text-green-600' : 'text-red-500'}>{status && status === "ok" ? "Active" : "UNActive"}</h5>
-        </div>
-        <div className='w-32 h-12 bg-black rounded-xl text-white'></div>
-        <div className='w-32 h-12 bg-black rounded-xl text-lg text-white font-bold'>Articles: {allArt}</div>
+  return (
+    <>
+     <div className='flex flex-col  justify-evenly w-full '  >
+      <div className='w-full h-24 px-4 flex justify-center items-center rounded-xl bg-white'
+      ><div className='w-32 mr-4 sm:w-28 sm:text-xs h-12 bg-black rounded-xl text-white text-sm font-bold text-wrap'></div>
+  <div className='w-32 mr-4  h-12 sm:w-28 sm:text-xs bg-black rounded-xl text-white text-sm md:text-base'>
+    Status:
+    <h5 className={status === 'ok' ? 'text-green-600' : 'text-red-500'}>
+      {status && status === "ok" ? "Active" : "UNActive"}
+    </h5>
+  </div>
+  <div className='w-32 sm:w-28 mr-4  h-12 sm:text-xs bg-black rounded-xl text-white text-sm font-bold text-wrap'></div>
+  <div className='w-32  sm:w-28 mr-4 h-12 sm:text-xs bg-black rounded-xl text-white text-sm md:text-base'>
+    Articles: {allArt}
+  </div>
       </div>
-      <div>
-        <div className='flex px-1 justify-between items-center'>
-          <h1>Top commented</h1>
-          <h5 onClick={moveToTopCommented}>More</h5>
-        </div>
-        <div className='w-full px-2 h-64 flex overflow-x-scroll'>
-          {articles && articles.map((article, index) => (
-            <div className='w-60 h-64 flex-none mr-2 bg-blue-400' key={index}>
-              <img className='w-60 h-1/3 object-contain' src={article.urlToImage} alt="" />
-              <h1 className='font-bold text-xs'>{article.title}</h1>
-              <h5 className='text-xs'>{article.description}</h5>
-            </div>
-          ))}
-        </div>
+     </div>
+     <div className='   left-0 font-bold mb-2'><h1 className=' mb-2'>Categorys</h1>
+     <div className='  flex justify-evenly w-full h-28'>
+      <div onClick={moveToTopCommented} className=' pt-1 rounded-2xl w-20 h-20 text-white text-center text-2xl bg-orange-600'> <FontAwesomeIcon  icon={faComment} /><div className='text-xs font-thin '>Top ceommented</div></div>
+      <div onClick={moveToTopLiked} className=' pt-1 rounded-2xl w-20 h-20 text-white text-center text-2xl bg-red-600'> <FontAwesomeIcon  icon={faHeart} /><div className='text-xs font-thin '>Top Liked</div></div>
+      <div onClick={moveToTopShared} className=' pt-1 rounded-2xl w-20 h-20 text-white text-center text-2xl bg-purple-600'> <FontAwesomeIcon  icon={faShare} /><div className='text-xs font-thin '>Top Shared</div></div>
       </div>
-      <div>
-        <div className='flex px-1 justify-between items-center'>
-          <h1>Top Liked</h1>
-          <h5 onClick={moveToTopLiked}>More</h5>
-        </div>
-        <div className='w-full px-2 h-64 flex overflow-x-scroll'>
-          {articles && articles.map((article, index) => (
-            <div className='w-60 h-64 flex-none mr-2 bg-blue-400' key={index}>
-              <img className='w-60 h-1/3 object-contain' src={article.urlToImage} alt="" />
-              <h1 className='font-bold text-xs'>{article.title}</h1>
-              <h5 className='text-xs'>{article.description}</h5>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div>
-        <div className='flex px-1 justify-between items-center'>
-          <h1>Top Shared</h1>
-          <h5 onClick={moveToTopShared}>More</h5>
-        </div>
-        <div className='w-full px-2 h-64 flex overflow-x-scroll'>
-          {articles && articles.map((article, index) => (
-            <div className='w-60 h-64 flex-none mr-2 bg-blue-400' key={index}>
-              <img className='w-60 h-1/3 object-contain' src={article.urlToImage} alt="" />
-              <h1 className='font-bold text-xs'>{article.title}</h1>
-              <h5 className='text-xs'>{article.description}</h5>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
+     </div>
+     
+    </>
   );
 }
 
