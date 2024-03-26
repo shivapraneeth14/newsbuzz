@@ -12,6 +12,9 @@ function Dashboard() {
   const [status, setStatus] = useState("");
   const navigate = useNavigate();
   const news = useSelector((state)=>(state.News))
+function movetocreate(){
+  navigate("/Dashboard/Create")
+}
 
   function moveToTopCommented() {
     navigate("/Dashboard/Topcommented");
@@ -67,7 +70,10 @@ function Dashboard() {
      </div>
      <div>
       <div className=' flex  justify-between'>
-        <div className=' font-bold text-sm'>Recently added</div>
+        <div className=' font-bold text-sm'>Recently added - created[{news.length}]
+        <br />
+        <h5 onClick={movetocreate}>create</h5>
+        </div>
         <div></div>
       </div>
       <div className=' mb-3 flex flex-wrap w-full min-h-64 pt-1 '>
