@@ -26,7 +26,7 @@ function Create() {
   }
 
   return (
-    <div className='flex  items-center justify-evenly'>
+    <div className='flex  flex-col lg:flex-row  items-center justify-evenly'>
       <div className=' mt-3  px-4 pt-4 h-auto  bg-neutral-600 '>
         <div className='flex  flex-col items-center justify-evenly'>
           <form action="submit" ref={formref} onSubmit={createnews}>
@@ -76,8 +76,8 @@ function Create() {
           </form>
         </div>
       </div>
-      <div className=' w-64  min-h-72 bg-gray-700'>
-        <p className= 'font-bold text-white mt-1'>Preview</p>
+      <div className=' w-64 mt-5 lg:mt-3 min-h-72 bg-gray-700'>
+        <p className= 'font-bold  text-white mt-5 '>Preview</p>
         <div className='pt-5 flex justify-center items-center flex-col'>
           <div className=' w-48 h-28 bg-white overflow-hidden'>
             <img className='object-cove w-48 h-full' src={url} alt="" />

@@ -97,27 +97,27 @@ function NewsFeedPerformance() {
   return (
     <>
     <h2 className=' font-bold text-blue-950 text-xl'>News Feed Performance</h2>
-    <div className=" flex justify-evenly">
+    <div className=" flex flex-col lg:flex-row justify-evenly">
       
-      <div className="chart-container bg-slate-900  w-96 h-40">
+      <div className="chart-container mt-4  bg-slate-900 max-w-96 lg:w-96 h-40">
         <Bar data={viewsData}  />
       </div>
-      <div className="chart-containe w-96 bg-slate-900  h-40">
+      <div className="chart-containe mt-4 max-w-96  lg:w-96  bg-slate-900  h-40">
         <Bar data={likesData} />
       </div>
     </div>
-    <h2 className=' font-bold text-blue-950 text-xl'>User traffic</h2>
-    <div className=' flex justify-evenly'>
-    <div className="chart-container bg-slate-900 w-96 h-40">
+    <h2 className=' font-bold mt-5 text-blue-950 text-xl'>User traffic</h2>
+    <div className=' flex flex-col lg:flex-row  justify-evenly'>
+    <div className="chart-container mt-4 bg-slate-900 max-w-96 lg:w-96  h-40">
         <Line data={engagementRateData}  />
       </div> 
-      <div className="chart-container  bg-slate-900 w-96 h-40">
+      <div className="chart-container mt-4  bg-slate-900 max-w-96  lg:w-96  h-40">
         <Line data={userscreentime}   />
       </div>
     </div>
-    <h2 className=' font-bold text-blue-950 text-xl'>User Preferences</h2>
+    <h2 className=' mt-5 font-bold text-blue-950 text-xl'>User Preferences</h2>
     <div className=' flex justify-center'>
-      <div className=' chart-container bg-slate-900  w-96 h-96'>
+      <div className=' chart-container bg-slate-900  max-w-96  lg:w-96  h-96'>
         <Pie data={Preferencesdata}/>
       </div>
     </div>

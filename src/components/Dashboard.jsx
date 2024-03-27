@@ -12,9 +12,7 @@ function Dashboard() {
   const [status, setStatus] = useState("");
   const navigate = useNavigate();
   const news = useSelector((state)=>(state.News))
-function movetocreate(){
-  navigate("/Dashboard/Create")
-}
+
 
   function moveToTopCommented() {
     navigate("/Dashboard/Topcommented");
@@ -72,14 +70,14 @@ function movetocreate(){
       <div className=' flex  justify-between'>
         <div className=' font-bold text-sm'>Recently added - created[{news.length}]
         <br />
-        <h5 onClick={movetocreate}>create</h5>
+        {/* <h5 onClick={movetocreate}>create</h5> */}
         </div>
         <div></div>
       </div>
       <div className=' mb-3 flex flex-wrap w-full min-h-64 pt-1 '>
     
           {news && news.map((item) => (
-            <div className=' rounded-lg bg-neutral-600' key={item.id}>
+            <div className=' rounded-lg ml-4 mt-5 px-3 pt-2 bg-green-700' key={item.id}>
               <div className='flex ml-2 justify-center items-center flex-col'>
                 <div className='w-48 h-28   overflow-hidden'>
                   <img className='object-cover w-48 h-full' src={item.imageurl} alt="" />
