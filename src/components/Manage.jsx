@@ -1,56 +1,57 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import Data from './Data';
 
 function Manage() {
-  const [manageddata,setmanageddata] = useState([])
-  const [datee,setdatee] = useState([])
- 
- 
-  useEffect(()=>{
-    const fetchdata= async ()=>{
+  const [manageddata, setManagedData] = useState([]);
+  const [datee, setDatee] = useState([]);
+  const [editedIndex, setEditedIndex] = useState(null);
+  const [editedValue, setEditedValue] = useState('');
+
+  useEffect(() => {
+    const fetchData = async () => {
       try {
-        const data =await  Data()
-        console.log(data)
-        setmanageddata(data.articles
-          )
+        const data = await Data();
+        setManagedData(data.articles);
       } catch (error) {
-       console.log(error)
+        console.log(error);
       }
-   
-     }
-     fetchdata()
+    };
+    fetchData();
+  }, []);
 
-  },[])
+  const deleteData = (id) => {
+    const updatedData = [...manageddata];
+    updatedData.splice(id, 1);
+    setManagedData(updatedData);
+  };
 
-  const deleteddata =(id)=>{
-    console.log(id)
-    const updateddata = [...manageddata]
-    updateddata.splice(id,1)
-    console.log("updated data",updateddata)
-    setmanageddata(updateddata)
-  }
- 
+  const handleEdit = (index, value) => {
+    setEditedIndex(index);
+    // setEditedValue(value);
+  };
 
+  const handleInputChange = (e) => {
+    setEditedValue(e.target.value);
+  };
 
-useEffect(() => {
- const onlydates = manageddata.map((item) => {
-   const date = new Date(item.publishedAt);
-   const month = date.getMonth() + 1; 
-   return [
-     date.getFullYear(),
-     "/",
-     date.getDay(),
-     "/",
-     month
-   ];
- });
- console.log("dates", onlydates);
- setdatee(onlydates);
-}, [manageddata]);
-  
+  const handleSaveEdit = (index) => {
+    const updatedData = [...manageddata];
+    updatedData[index].source.name = editedValue;
+    setManagedData(updatedData);
+    setEditedIndex(null);
+  };
+
+  useEffect(() => {
+    const onlyDates = manageddata.map((item) => {
+      const date = new Date(item.publishedAt);
+      const month = date.getMonth() + 1;
+      return `${date.getFullYear()}/${date.getDay()}/${month}`;
+    });
+    setDatee(onlyDates);
+  }, [manageddata]);
 
   return (
-    <div className='flex justify-center'>
+    <div className="flex justify-center">
       <div>
         <table>
           <thead>
@@ -62,15 +63,33 @@ useEffect(() => {
               <th className="px-4 py-2">Actions</th>
             </tr>
           </thead>
-          <tbody> 
-            {manageddata && manageddata.map((item, index) => (
+          <tbody>
+            {manageddata.map((item, index) => (
               <tr key={index}>
-                <td>{item.source.name
-}</td>
+                <td>
+                  {editedIndex === index ? (
+                    <input
+                      value={editedValue}
+                      onChange={handleInputChange}
+                      type="text"
+                    />
+                  ) : (
+                    item.source.name
+                  )}
+                </td>
                 <td>{item.category}</td>
                 <td>{datee[index]}</td>
                 <td>{item.status}</td>
-                <td onClick={() => deleteddata(index)}>Delete</td>
+                <td>
+                  {editedIndex === index ? (
+                    <div onClick={() => handleSaveEdit(index)}>Save</div>
+                  ) : (
+                    <div onClick={() => handleEdit(index, item.source.name)}>
+                      Edit
+                    </div>
+                  )}
+                  <div onClick={() => deleteData(index)}>Delete</div>
+                </td>
               </tr>
             ))}
           </tbody>
