@@ -24,7 +24,7 @@ To run this project locally, you need to have Node.js and npm installed on your 
 1. Clone the repository:
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/shivapraneeth14/newsbuzz.git
  ### running
    cd adminpanel
    npm run dev
