@@ -15,7 +15,7 @@ const Dataslice = createSlice({
             };
 
             state.News.push(newNews);
-            localStorage.setItem("newsData", JSON.stringify(state.News))
+            
         }
     }
 });

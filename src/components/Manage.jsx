@@ -3,7 +3,9 @@ import Data from './Data';
 
 function Manage() {
   const [manageddata,setmanageddata] = useState([])
-
+  const [datee,setdatee] = useState([])
+ 
+ 
   useEffect(()=>{
     const fetchdata= async ()=>{
       try {
@@ -28,6 +30,23 @@ function Manage() {
     setmanageddata(updateddata)
   }
  
+
+
+useEffect(() => {
+ const onlydates = manageddata.map((item) => {
+   const date = new Date(item.publishedAt);
+   const month = date.getMonth() + 1; 
+   return [
+     date.getFullYear(),
+     "/",
+     date.getDay(),
+     "/",
+     month
+   ];
+ });
+ console.log("dates", onlydates);
+ setdatee(onlydates);
+}, [manageddata]);
   
 
   return (
@@ -49,7 +68,7 @@ function Manage() {
                 <td>{item.source.name
 }</td>
                 <td>{item.category}</td>
-                <td>{item.publishedAt}</td>
+                <td>{datee[index]}</td>
                 <td>{item.status}</td>
                 <td onClick={() => deleteddata(index)}>Delete</td>
               </tr>

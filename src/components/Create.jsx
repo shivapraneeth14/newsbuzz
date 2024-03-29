@@ -12,6 +12,19 @@ function Create() {
   const dispatch =useDispatch()
   const formref = useRef(null)
 
+const setfile=(e)=>{
+
+const file = e.target.files[0]
+if(file){
+  const reader = new FileReader();
+  reader.onload=()=>{
+    console.log(reader.result)
+    setUrl(reader.result)
+  }
+  reader.readAsDataURL(file);
+  
+}
+}
 
 
   const createnews =(e)=>{
@@ -61,7 +74,7 @@ function Create() {
             <div className='flex mt-4'>
               <p className='font-bold mr-2'>Image URL</p>
               <input
-              required
+             
                 onChange={(e) => setUrl(e.target.value)}
                 className='rounded-lg mb-3 w-44' 
                 type="text" 
@@ -71,16 +84,17 @@ function Create() {
             <input
             accept="image/*" 
              className='ml-12' type="file" name="" id="" />
-            <button className='mt-3 w-16 rounded-md font-bold text-black bg-white'>Create</button>
+            <button className='mt-3 w-16 rounded-md font-bold text-black bg-white'  onChange={setfile}>Create</button>
           </div>
           </form>
         </div>
       </div>
-      <div className=' w-64 mt-5 lg:mt-3 min-h-72 bg-gray-700'>
+      <div className=' w-64 mt-5 lg:mt-3 min-h-72 bg-orange-500'>
         <p className= 'font-bold  text-white mt-5 '>Preview</p>
         <div className='pt-5 flex justify-center items-center flex-col'>
           <div className=' w-48 h-28 bg-white overflow-hidden'>
-            <img className='object-cove w-48 h-full' src={url} alt="" />
+          {url && <img className='object-cover w-full h-full' src={url} alt="" />}
+   
           </div>
         </div>
         <p className='text-black font-bold overflow-hidden  text-center w-full'>{title}</p>
