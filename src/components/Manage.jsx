@@ -25,9 +25,9 @@ function Manage() {
     setManagedData(updatedData);
   };
 
-  const handleEdit = (index, value) => {
+  const handleEdit = (index) => {
     setEditedIndex(index);
-    // setEditedValue(value);
+    
   };
 
   const handleInputChange = (e) => {
@@ -52,21 +52,21 @@ function Manage() {
 
   return (
     <div className="flex justify-center">
-      <div>
-        <table>
+      <div className="overflow-x-auto">
+        <table className="w-full sm:max-w-md border-collapse border border-gray-300">
           <thead>
             <tr>
-              <th className="px-4 py-2">Title</th>
-              <th className="px-4 py-2">Category</th>
-              <th className="px-4 py-2">Creation Date</th>
-              <th className="px-4 py-2">Status</th>
-              <th className="px-4 py-2">Actions</th>
+              <th className="px-4 py-2 border border-gray-300">Title</th>
+              <th className="px-4 py-2 border border-gray-300">Category</th>
+              <th className="px-4 py-2 border border-gray-300">Creation Date</th>
+              <th className="px-4 py-2 border border-gray-300">Status</th>
+              <th className="px-4 py-2 border border-gray-300">Actions</th>
             </tr>
           </thead>
           <tbody>
             {manageddata.map((item, index) => (
-              <tr key={index}>
-                <td>
+              <tr key={index} className="border border-gray-300">
+                <td className="px-4 py-2 border border-gray-300">
                   {editedIndex === index ? (
                     <input
                       value={editedValue}
@@ -77,10 +77,10 @@ function Manage() {
                     item.source.name
                   )}
                 </td>
-                <td>{item.category}</td>
-                <td>{datee[index]}</td>
-                <td>{item.status}</td>
-                <td>
+                <td className="px-4 py-2 border border-gray-300">{item.category}</td>
+                <td className="px-4 py-2 border border-gray-300">{datee[index]}</td>
+                <td className="px-4 py-2 border border-gray-300">{item.status}</td>
+                <td className="px-4 py-2 border border-gray-300">
                   {editedIndex === index ? (
                     <div onClick={() => handleSaveEdit(index)}>Save</div>
                   ) : (
